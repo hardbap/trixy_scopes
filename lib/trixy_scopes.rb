@@ -3,6 +3,10 @@ module TrixyScopes
   def self.included(klass)
     klass.class_eval do
       table_name = klass.quoted_table_name
+      connection = ActiveRecord::Base.connection
+      adapter    = connection.adapter_name
+      
+      named_scope :random, :order => adapter == "SQLite" ? "RANDOM()" : "RAND()"
      
       named_scope :limit, lambda { |limit| { :limit => limit } }
       named_scope :latest, lambda { |limit| { :limit => limit, :order => "#{table_name}.`created_at` desc" } } 
@@ -14,7 +18,7 @@ module TrixyScopes
       
       klass.columns.each do |column|
         attribute = column.name
-        quoted_column_name = ActiveRecord::Base.connection.quote_table_name("#{klass.table_name}.#{attribute}")
+        quoted_column_name = connection.quote_table_name("#{klass.table_name}.#{attribute}")
         
         named_scope "#{attribute}_is", lambda { |value| { :conditions => { attribute => value } } }
         named_scope "#{attribute}_is_not", lambda { |value| { :conditions => ["#{quoted_column_name} != ?", value] } }
