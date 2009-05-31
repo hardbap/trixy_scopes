@@ -34,8 +34,8 @@ module TrixyScopes
           named_scope "#{column.name}_before", lambda { |datetime| { :conditions => ["#{quoted_column_name} < ?", datetime] } }
           named_scope "#{column.name}_after", lambda { |datetime| { :conditions => ["#{quoted_column_name} > ?", datetime] } }
           
-          if column_name.last(3) == "_at"
-            column_name_alias = column_name.chomp("_at")
+          if column.name.last(3) == "_at"
+            column_name_alias = column.name.chomp("_at")
             named_scope "#{column_name_alias}_between", lambda { |from, to| { :conditions => ["#{quoted_column_name} BETWEEN ? AND ?", from, to] } }
             named_scope "#{column_name_alias}_not_between", lambda { |from, to| { :conditions => ["#{quoted_column_name} NOT BETWEEN ? AND ?", from, to] } }
             named_scope "#{column_name_alias}_before", lambda { |datetime| { :conditions => ["#{quoted_column_name} < ?", datetime] } }
