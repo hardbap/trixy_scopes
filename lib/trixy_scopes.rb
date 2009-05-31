@@ -14,7 +14,7 @@ module TrixyScopes
       
       klass.columns.each do |column|
         attribute = column.name
-        sanitized_attribute = `#{table_name}`.`#{attribute}`
+        sanitized_attribute = "`#{table_name}`.`#{attribute}`"
   
         named_scope "#{attribute}_is", lambda { |value| { :conditions => { attribute => value } } }
         named_scope "#{attribute}_is_not", lambda { |value| { :conditions => ["#{sanitized_attribute} != ?", value] } }
