@@ -9,12 +9,6 @@ Datetime columns ending with **_at** get also functional aliases:
 Product.updated_at_before('2008-01-01') is equal to:
 Product.updated_before('2008-01-01')
 
-## Todo's
-
-* latest, earliest, random: should have optional limits
-* add scopes for offset
-* add some smart ordering by multiple attributes
-
 ## Available named scopes
 
 **limit(*integer*)** - limits result to given number of records
