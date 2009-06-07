@@ -21,20 +21,20 @@ limits result to exact number of records
 
 Product.limit(5)
 
-** random
+**random**
 Product.random
 Product.limit(3).random
 
-** latest
+**latest**
 Product.latest(5)
 
-# earliest
+**earliest**
 Product.earliest(10)
 
-** after
-** before
-** in
-** not_in
+**after**
+**before**
+**in**
+**not_in**
 
 
 
