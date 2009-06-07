@@ -29,7 +29,7 @@ Product.limit(3).random
 # => SELECT * FROM `sites` ORDER BY RAND() LIMIT 3
 </pre>
 
-**latest** - picks up latest records (ordered by **created_at**)
+**latest(<integer>)** - picks up latest records (ordered by **created_at**)
 
 <pre>
 Product.latest
@@ -39,28 +39,28 @@ Product.latest(5)
 # => SELECT * FROM `products` ORDER BY `products`.`created_at` desc LIMIT 5
 </pre>
 
-**earliest** - picks up earliest records (ordered by **created_at**)
+**earliest(<integer>)** - picks up earliest records (ordered by **created_at**)
 
 <pre>
 Product.earliest(10)
 # => SELECT * FROM `products` ORDER BY `products`.`created_at` asc LIMIT 10
 </pre>
 
-**after** - picks up records after given datetime
+**after(<datetime>)** - picks up records after given datetime
 
 <pre>
 Product.after(1.year.ago)
 # => SELECT * FROM `products` WHERE (`products`.`created_at` > '2008-06-07 16:11:56') 
 </pre>
 
-**before** - picks up records before given datetime
+**before(<datetime>)** - picks up records before given datetime
 
 <pre>
 Product.before(Time.now.beginning_of_day)
 # => SELECT * FROM `products` WHERE (`products`.`created_at` < '2008-06-07 00:00:00') 
 </pre>
 
-**in** - picks up records where with given array of ids
+**in(<array_of_ids>)** - picks up records where with given array of ids
 
 <pre>
 Product.in(1,2,3)
@@ -68,7 +68,7 @@ Product.in([1,2,3])
 # => SELECT * FROM `products` WHERE (`products`.`id` IN (1,2,3))
 </pre>
 
-**not_in** - picks up records that have ids other that given array
+**not_in(<array_of_ids>)** - picks up records that have ids other that given array
 
 <pre>
 Product.not_in(1,2,3)
@@ -77,57 +77,127 @@ Product.not_in(1,2,3)
 
 ## ALL column types
 
-**<attribute_name>_is**
+**<attribute_name>_is(<attribute_value>)**
 
-**<attribute_name>_is_not**
+<pre>
+Author.last_name_is("Smith")
+# => SELECT * FROM `authors` WHERE (`authors`.`last_name` = 'Smith')
+
+Product.price_is(19.99)
+# => SELECT * FROM `products` WHERE (`products`.`price` = 19.99)
+</pre>
+
+**<attribute_name>_is_not(<attribute_value>)**
+
+<pre>
+Author.first_name_is_not("John")
+# => SELECT * FROM `authors` WHERE (`authors`.`first_name` != 'John')
+
+Product.price_is_not(1_000)
+# => SELECT * FROM `products` WHERE (`products`.`price` != 1000)
+</pre>
 
 **<attribute_name>_is_nil**
 
+<pre>
+User.full_name_is_nil
+# => SELECT * FROM `users` WHERE (`users`.`full_name` IS NULL) 
+</pre>
+
 **<attribute_name>_is_not_nil**
 
+<pre>
+Product.description_is_not_nil
+# => SELECT * FROM `products` WHERE (`products`.`description` IS NOT NULL)
+</pre>
 
 ## STRING columns
 
 **<attribute_name>_starts_with**
 
+<pre>
+</pre>
+
 **<attribute_name>_ends_with**
+
+<pre>
+</pre>
 
 **<attribute_name>_includes**
 
+<pre>
+</pre>
+
 **<attribute_name>_matches**
+
+<pre>
+</pre>
 
 **<attribute_name>_like**
 
+<pre>
+</pre>
+
 **<attribute_name>_not_like**
+
+<pre>
+</pre>
 
 ## BOOLEAN
 
 **<attribute_name>**
 
+<pre>
+</pre>
+
 **not_<attribute_name>**
+
+<pre>
+</pre>
 
 ## DATETIME
 
 **<attribute_name>_before**
 
+<pre>
+</pre>
+
 **<attribute_name>_after**
+
+<pre>
+</pre>
 
 **<attribute_name>_between**
 
+<pre>
+</pre>
+
 **<attribute_name>_not_between**
+
+<pre>
+</pre>
 
 ## INTEGER, FLOAT
 
 **<attribute_name>_greater_than**
 
+<pre>
+</pre>
+
 **<attribute_name>_greater_or_equal_to**
 
+<pre>
+</pre>
 
 **<attribute_name>_less_than**
 
+<pre>
+</pre>
+
 **<attribute_name>_less_than_or_equal_to**
 
-
+<pre>
+</pre>
 
 
 ## Installation
