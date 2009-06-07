@@ -156,11 +156,15 @@ Product.description_is_not_nil
 **<attribute_name>**
 
 <pre>
+Product.sold
+# => SELECT * FROM `products` WHERE (`products`.`sold` = 1)
 </pre>
 
 **not_<attribute_name>**
 
 <pre>
+Product.not_sold
+# => SELECT * FROM `products` WHERE (`products`.`sold` = 0)
 </pre>
 
 ## DATETIME
@@ -178,11 +182,16 @@ Product.description_is_not_nil
 **<attribute_name>_between(*from*, *to*)**
 
 <pre>
+Product.created_between('2009-05-01', '2009-05-31')
+# => SELECT * FROM `products` WHERE (`products`.`created_at` BETWEEN '2009-05-01' AND '2009-05-31') 
+
 </pre>
 
-**<attribute_name>_not_between(*from*, *to*)**
+**not_<attribute_name>_between(*from*, *to*)**
 
 <pre>
+Product.not_created_between('2009-05-01', '2009-05-31')
+# => SELECT * FROM `products` WHERE (`products`.`created_at` NOT BETWEEN '2009-05-01' AND '2009-05-31') 
 </pre>
 
 ## INTEGER, FLOAT
