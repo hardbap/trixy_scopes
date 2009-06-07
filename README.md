@@ -35,7 +35,7 @@ Product.limit(5)
 # => SELECT * FROM `products` LIMIT 5
 </pre>
 
-**random(*integer*)** - adapter agnostic random
+**random** - adapter agnostic random
 
 <pre>
 Product.limit(3).random
