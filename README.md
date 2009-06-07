@@ -17,14 +17,14 @@ Product.updated_before('2008-01-01')
 
 ## Available named scopes
 
-**limit** - limits result to given number of records
+**limit(<integer>)** - limits result to given number of records
 
 <pre>
 Product.limit(5)
 # => SELECT * FROM `products` LIMIT 5
 </pre>
 
-**random** - adapter agnostic random
+**random(<integer>)** - adapter agnostic random
 
 <pre>
 Product.limit(3).random
