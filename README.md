@@ -9,6 +9,23 @@ Datetime columns ending with **_at** get also functional aliases:
 Product.updated_at_before('2008-01-01') is equal to:
 Product.updated_before('2008-01-01')
 
+## Installation
+
+
+script/plugin install git://github.com/tomaszmazur/trixy_scopes.git
+
+in your ActiveRecord model:
+
+<pre>
+  class Product < ActiveRecord::Base
+    ...
+  
+    include TrixyScopes
+    
+  end
+</pre>
+to gains access to:
+
 ## Available named scopes
 
 **limit(*integer*)** - limits result to given number of records
@@ -211,22 +228,7 @@ Product.not_created_between('2009-05-01', '2009-05-31')
 </pre>
 
 
-## Installation
 
-
-script/plugin install git://github.com/tomaszmazur/trixy_scopes.git
-
-in your ActiveRecord model:
-
-<pre>
-  class Product < ActiveRecord::Base
-    ...
-  
-    include TrixyScopes
-    
-  end
-</pre>
-to gains access to following named_scopes:
 
 
 ## Copyright
