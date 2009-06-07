@@ -1,16 +1,21 @@
 # TrixyScopes
 
 Collection of useful named scopes for rails apps.
-Additional methods are generated based on column type and prefixed by column name:
-ie: Product.name_is("ipod"), Product.price_is_greater_than(100)
+Additional methods are generated based on column type and name:
+ie: Product.name_is("ipod"), Product.price_greater_than(100)
 
 Datetime columns ending with **_at** get also functional aliases:
 
 Product.updated_at_before('2008-01-01') is equal to:
 Product.updated_before('2008-01-01')
 
+## Todo's
 
-## Examples
+* latest, earliest, random: should have optional limits
+* add scopes for offset
+* add some smart ordering by multiple attributes
+
+## Available named scopes
 
 **limit** - limits result to given number of records
 
@@ -29,17 +34,14 @@ Product.limit(3).random
 # => SELECT * FROM `sites` ORDER BY RAND() LIMIT 3
 </pre>
 
-**latest(<integer>)** - picks up latest records (ordered by **created_at**)
+**latest(<integer>)** - picks up x latest records (ordered by **created_at**)
 
 <pre>
-Product.latest
-# => SELECT * FROM `products` ORDER BY `products`.`created_at` desc
-
 Product.latest(5)
 # => SELECT * FROM `products` ORDER BY `products`.`created_at` desc LIMIT 5
 </pre>
 
-**earliest(<integer>)** - picks up earliest records (ordered by **created_at**)
+**earliest(<integer>)** - picks up x earliest records (ordered by **created_at**)
 
 <pre>
 Product.earliest(10)
@@ -60,20 +62,6 @@ Product.before(Time.now.beginning_of_day)
 # => SELECT * FROM `products` WHERE (`products`.`created_at` < '2008-06-07 00:00:00') 
 </pre>
 
-**in(<array_of_ids>)** - picks up records where with given array of ids
-
-<pre>
-Product.in(1,2,3)
-Product.in([1,2,3])
-# => SELECT * FROM `products` WHERE (`products`.`id` IN (1,2,3))
-</pre>
-
-**not_in(<array_of_ids>)** - picks up records that have ids other that given array
-
-<pre>
-Product.not_in(1,2,3)
-# => SELECT * FROM `products` WHERE (`sites`.`id` NOT IN(1,2,3))
-</pre>
 
 ## ALL column types
 
@@ -95,6 +83,26 @@ Author.first_name_is_not("John")
 
 Product.price_is_not(1_000)
 # => SELECT * FROM `products` WHERE (`products`.`price` != 1000)
+</pre>
+
+**<attribute_name_plural>_are(<array>)**
+
+<pre>
+Product.ids_are(1,2,3)
+# => SELECT * FROM `products` WHERE (`products`.`id` IN (1,2,3))
+
+Author.last_names_are("Smith", "Black")
+# => SELECT * FROM `authors` WHERE (`authors`.`full_name` IN ('Smith','Black'))
+</pre>
+
+**<attribute_name_plural>_are_not(<array>)**
+
+<pre>
+Product.prices_are_not(0.99, 5.99, 19.99)
+# => SELECT * FROM `products` WHERE (`products`.`id` IN (0.99,5.99,19.99))
+
+Author.first_names_are_not("John", "Mike")
+# => SELECT * FROM `authors` WHERE (`authors`.`first_name` IN ('John','Mike'))
 </pre>
 
 **<attribute_name>_is_nil**
