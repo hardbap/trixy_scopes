@@ -1,12 +1,12 @@
 # TrixyScopes
 
 Collection of useful named scopes for rails apps.
-Additional methods are generated based on column type and name:
+Additional methods are based on column name and type
 ie: Product.name_is("ipod"), Product.price_greater_than(100)
 
 Datetime columns ending with **_at** get also functional aliases:
 
-Product.updated_at_before('2008-01-01') is equal to:
+Product.updated_at_before('2008-01-01') becomes:
 Product.updated_before('2008-01-01')
 
 ## Installation
