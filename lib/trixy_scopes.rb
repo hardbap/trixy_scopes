@@ -2,11 +2,13 @@ module TrixyScopes
 
   def self.included(klass)
     klass.class_eval do
+      return unless klass.table_exists?
       table_name = klass.quoted_table_name
       connection = ActiveRecord::Base.connection
       adapter    = connection.adapter_name
-      
+         
       named_scope :random, :order => adapter == "SQLite" ? "RANDOM()" : "RAND()"
+      named_scope :order_by, lambda { |order| { :order => order} }
      
       named_scope :limit, lambda { |limit| { :limit => limit } }
       named_scope :latest, lambda { |limit| { :limit => limit, :order => "#{table_name}.`created_at` desc" } } 

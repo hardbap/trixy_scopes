@@ -1,0 +1,16 @@
+TrixyScopes
+===========
+
+
+
+Installation
+============
+
+script/plugin install git://github.com/tomaszmazur/trixy_scopes.git
+
+in your ActiveRecord model:
+
+include TrixyScopes
+
+
+Copyright (c) 2009 [Tomasz Mazur], released under the MIT license
