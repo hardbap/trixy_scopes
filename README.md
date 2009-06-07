@@ -17,14 +17,14 @@ Product.updated_before('2008-01-01')
 
 ## Available named scopes
 
-**limit(__integer__)** - limits result to given number of records
+**limit(*integer*)** - limits result to given number of records
 
 <pre>
 Product.limit(5)
 # => SELECT * FROM `products` LIMIT 5
 </pre>
 
-**random(__integer__)** - adapter agnostic random
+**random(*integer*)** - adapter agnostic random
 
 <pre>
 Product.limit(3).random
@@ -34,28 +34,28 @@ Product.limit(3).random
 # => SELECT * FROM `sites` ORDER BY RAND() LIMIT 3
 </pre>
 
-**latest(__integer__)** - picks up x latest records (ordered by **created_at**)
+**latest(*integer*)** - picks up x latest records (ordered by **created_at**)
 
 <pre>
 Product.latest(5)
 # => SELECT * FROM `products` ORDER BY `products`.`created_at` desc LIMIT 5
 </pre>
 
-**earliest(__integer__)** - picks up x earliest records (ordered by **created_at**)
+**earliest(*integer*)** - picks up x earliest records (ordered by **created_at**)
 
 <pre>
 Product.earliest(10)
 # => SELECT * FROM `products` ORDER BY `products`.`created_at` asc LIMIT 10
 </pre>
 
-**after(__datetime__)** - picks up records after given datetime
+**after(*datetime*)** - picks up records after given datetime
 
 <pre>
 Product.after(1.year.ago)
 # => SELECT * FROM `products` WHERE (`products`.`created_at` > '2008-06-07 16:11:56') 
 </pre>
 
-**before(__datetime__)** - picks up records before given datetime
+**before(*datetime*)** - picks up records before given datetime
 
 <pre>
 Product.before(Time.now.beginning_of_day)
@@ -65,7 +65,7 @@ Product.before(Time.now.beginning_of_day)
 
 ## ALL column types
 
-**<attribute_name>_is(__attribute_value__)**
+**<attribute_name>_is(*attribute_value*)**
 
 <pre>
 Author.last_name_is("Smith")
