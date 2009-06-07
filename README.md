@@ -1,6 +1,7 @@
 TrixyScopes
 ===========
 
+Collection of useful named scopes for rails apps.
 
 
 Installation
@@ -22,19 +23,26 @@ limits result to exact number of records
 Product.limit(5)
 
 **random**
+
 Product.random
 Product.limit(3).random
 
 **latest**
+
 Product.latest(5)
 
 **earliest**
+
 Product.earliest(10)
 
 **after**
+
 **before**
+
 **in**
+
 **not_in**
+
 
 
 
