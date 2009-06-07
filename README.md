@@ -75,7 +75,7 @@ Product.price_is(19.99)
 # => SELECT * FROM `products` WHERE (`products`.`price` = 19.99)
 </pre>
 
-**<attribute_name>_is_not(<attribute_value>)**
+**<attribute_name>_is_not(*attribute_value*)**
 
 <pre>
 Author.first_name_is_not("John")
@@ -85,7 +85,7 @@ Product.price_is_not(1_000)
 # => SELECT * FROM `products` WHERE (`products`.`price` != 1000)
 </pre>
 
-**<attribute_name_plural>_are(<array>)**
+**<attribute_name_plural>_are(*array*)**
 
 <pre>
 Product.ids_are(1,2,3)
@@ -95,7 +95,7 @@ Author.last_names_are("Smith", "Black")
 # => SELECT * FROM `authors` WHERE (`authors`.`full_name` IN ('Smith','Black'))
 </pre>
 
-**<attribute_name_plural>_are_not(<array>)**
+**<attribute_name_plural>_are_not(*array*)**
 
 <pre>
 Product.prices_are_not(0.99, 5.99, 19.99)
@@ -121,32 +121,32 @@ Product.description_is_not_nil
 
 ## STRING columns
 
-**<attribute_name>_starts_with**
+**<attribute_name>_starts_with(*string*)**
 
 <pre>
 </pre>
 
-**<attribute_name>_ends_with**
+**<attribute_name>_ends_with(*string*)**
 
 <pre>
 </pre>
 
-**<attribute_name>_includes**
+**<attribute_name>_includes(*string*)**
 
 <pre>
 </pre>
 
-**<attribute_name>_matches**
+**<attribute_name>_matches(*regexp*)**
 
 <pre>
 </pre>
 
-**<attribute_name>_like**
+**<attribute_name>_like(*string*)**
 
 <pre>
 </pre>
 
-**<attribute_name>_not_like**
+**<attribute_name>_not_like(*string*)**
 
 <pre>
 </pre>
@@ -165,44 +165,44 @@ Product.description_is_not_nil
 
 ## DATETIME
 
-**<attribute_name>_before**
+**<attribute_name>_before(*datetime*)**
 
 <pre>
 </pre>
 
-**<attribute_name>_after**
+**<attribute_name>_after(*datetime*)**
 
 <pre>
 </pre>
 
-**<attribute_name>_between**
+**<attribute_name>_between(*from*, *to*)**
 
 <pre>
 </pre>
 
-**<attribute_name>_not_between**
+**<attribute_name>_not_between(*from*, *to*)**
 
 <pre>
 </pre>
 
 ## INTEGER, FLOAT
 
-**<attribute_name>_greater_than**
+**<attribute_name>_greater_than(*value*)**
 
 <pre>
 </pre>
 
-**<attribute_name>_greater_or_equal_to**
+**<attribute_name>_greater_or_equal_to(*value*)**
 
 <pre>
 </pre>
 
-**<attribute_name>_less_than**
+**<attribute_name>_less_than(*value*)**
 
 <pre>
 </pre>
 
-**<attribute_name>_less_than_or_equal_to**
+**<attribute_name>_less_than_or_equal_to(*value*)**
 
 <pre>
 </pre>
