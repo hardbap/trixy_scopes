@@ -1,21 +1,9 @@
-TrixyScopes
-===========
+# TrixyScopes
 
 Collection of useful named scopes for rails apps.
 
 
-Installation
-============
-
-script/plugin install git://github.com/tomaszmazur/trixy_scopes.git
-
-in your ActiveRecord model:
-
-include TrixyScopes
-
-to gains access to following named_scopes:
-
-Examples:
+## Examples
 
 ** limit
 limits result to exact number of records
@@ -43,7 +31,24 @@ Product.earliest(10)
 
 **not_in**
 
+## Installation
 
 
+script/plugin install git://github.com/tomaszmazur/trixy_scopes.git
 
-Copyright (c) 2009 [Tomasz Mazur], released under the MIT license
+in your ActiveRecord model:
+
+<pre>
+  class Product < ActiveRecord::Base
+  ...
+  
+  include TrixyScopes
+  
+  ...
+</pre>
+to gains access to following named_scopes:
+
+
+## Copyright
+
+Copyright (c) 2009 Tomasz Mazur, released under the MIT license
