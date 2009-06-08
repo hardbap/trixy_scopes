@@ -1,5 +1,8 @@
 module TrixyScopes 
 
+  # TODO
+  # latest, earliest, random - limit should be optional
+
   def self.included(klass)
     klass.class_eval do
       return unless klass.table_exists?
@@ -11,12 +14,11 @@ module TrixyScopes
       named_scope :order_by, lambda { |order| { :order => order} }
      
       named_scope :limit, lambda { |limit| { :limit => limit } }
-      named_scope :latest, lambda { |limit| { :limit => limit, :order => "#{table_name}.`created_at` desc" } } 
-      named_scope :earliest, lambda { |limit| { :limit => limit, :order => "#{table_name}.`created_at` asc" } }
+      named_scope :latest, lambda { |limit| { :limit => limit, :order => "#{table_name}.`created_at` DESC" } } 
+      named_scope :earliest, lambda { |limit| { :limit => limit, :order => "#{table_name}.`created_at` ASC" } }
       named_scope :before, lambda { |datetime| { :conditions => ["#{table_name}.`created_at` < ?", datetime] } }
       named_scope :after, lambda { |datetime| { :conditions => ["#{table_name}.`created_at` > ?", datetime] } }
-      named_scope :in, lambda { |*ids| { :conditions => {:id => ids.flatten } } }
-      named_scope :not_in, lambda { |*ids| { :conditions => ["#{table_name}.`id` NOT IN(?)", ids.flatten] } }
+
       
       klass.columns.each do |column|
         attribute = column.name
@@ -26,6 +28,9 @@ module TrixyScopes
         named_scope "#{attribute}_is_not", lambda { |value| { :conditions => ["#{quoted_column_name} != ?", value] } }
         named_scope "#{attribute}_is_nil", :conditions => { attribute => nil }
         named_scope "#{attribute}_is_not_nil", :conditions => "#{quoted_column_name} IS NOT NULL"
+        
+        named_scope "#{attribute.pluralize}_are", lambda { |*ids| { :conditions => { attribute => ids.flatten } } }
+        named_scope "#{attribute.pluralize}_are_not", lambda { |*ids| { :conditions => ["#{quoted_column_name} NOT IN(?)", ids.flatten] } }
         
         unless column.type == :boolean
           named_scope "#{attribute}_between", lambda { |from, to| { :conditions => ["#{quoted_column_name} BETWEEN ? AND ?", from, to] } }
@@ -44,7 +49,7 @@ module TrixyScopes
           if attribute.last(3) == "_at"
             attribute_alias = attribute.chomp("_at")
             named_scope "#{attribute_alias}_between", lambda { |from, to| { :conditions => ["#{quoted_column_name} BETWEEN ? AND ?", from, to] } }
-            named_scope "#{attribute_alias}_not_between", lambda { |from, to| { :conditions => ["#{quoted_column_name} NOT BETWEEN ? AND ?", from, to] } }
+            named_scope "not_#{attribute_alias}_between", lambda { |from, to| { :conditions => ["#{quoted_column_name} NOT BETWEEN ? AND ?", from, to] } }
             named_scope "#{attribute_alias}_before", lambda { |datetime| { :conditions => ["#{quoted_column_name} < ?", datetime] } }
             named_scope "#{attribute_alias}_after", lambda { |datetime| { :conditions => ["#{quoted_column_name} > ?", datetime] } }
           end
